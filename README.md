@@ -59,30 +59,5 @@ A paginação é feita **no banco** pelo Spring Data `Pageable` e retorna metada
 
 Os testes verificam a existência de pelo menos 60 produtos, tamanho padrão e limite de páginas, filtro case-insensitive, ID válido e erro 404 para ID inexistente.
 
-## Publicar no GitHub (primeira vez)
-
-Crie um repositório vazio chamado **`loja-compre-bem-api`** em https://github.com/new na sua conta. Não selecione README, `.gitignore` nem licença na criação (já há arquivos correspondentes no projeto).
-
-Abra o PowerShell **na pasta extraída que contém `pom.xml`** e execute:
-
-```powershell
-git init
-git add .
-git commit -m "Implementa paginacao e busca de produtos"
-git branch -M main
-git remote add origin https://github.com/CharlieChaplim/loja-compre-bem-api.git
-git push -u origin main
-```
-
-O Git pode solicitar autenticação em uma janela do navegador. Se pedir nome/e-mail na primeira execução, configure `git config --global user.name "Seu Nome"` e `git config --global user.email "seu-email@exemplo.com"` e repita o commit.
-
-Para mudanças futuras, use `git add .`, `git commit -m "Descreva a mudanca"` e `git push`.
-
-## Organização do projeto
-
-- `controller/ProdutoController.java`: parâmetros de consulta, IDs e rotas REST.
-- `service/ProdutoService.java`: regras de paginação, limites, busca e 404.
-- `repository/ProdutoRepository.java`: consultas Spring Data JPA.
-- `config/ProdutoDataLoader.java`: carga inicial de 60 produtos.
-- `entity/Produto.java` e `dto/`: modelo de dados e objetos de transferência.
+o.java` e `dto/`: modelo de dados e objetos de transferência.
 - `src/test/`: testes de comportamento.
