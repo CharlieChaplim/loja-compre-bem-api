@@ -22,7 +22,6 @@ public class ProdutoService {
     public Page<ProdutoResponseDTO> findAll(int page, int size, String busca) {
         int paginaSegura = Math.max(0, page);
         int tamanhoSeguro = Math.min(50, Math.max(1, size));
-        // Ordenacao estavel evita itens 'pularem' de pagina entre consultas.
         PageRequest pageable = PageRequest.of(paginaSegura, tamanhoSeguro,
                 Sort.by("nome").ascending().and(Sort.by("id").ascending()));
         Page<Produto> produtos = (busca == null || busca.isBlank())
@@ -52,6 +51,10 @@ public class ProdutoService {
         existente.setPreco(dto.preco());
         existente.setCategoria(dto.categoria());
         existente.setImagem(dto.imagem());
+        // Requisicoes antigas que omitem quantidade preservam o estoque.
+        if (dto.quantidade() != null) {
+            existente.setQuantidade(dto.quantidade());
+        }
         return ProdutoResponseDTO.toDto(produtoRepository.save(existente));
     }
 
