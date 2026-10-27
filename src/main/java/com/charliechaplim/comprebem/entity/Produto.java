@@ -40,7 +40,7 @@ public class Produto {
         produto.setPreco(dto.preco());
         produto.setCategoria(dto.categoria());
         produto.setImagem(dto.imagem());
-        produto.setQuantidade(0);
+        produto.setQuantidade(dto.quantidade() == null ? 0 : dto.quantidade());
         return produto;
     }
 }
