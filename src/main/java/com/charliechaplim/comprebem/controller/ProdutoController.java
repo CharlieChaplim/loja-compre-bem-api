@@ -32,11 +32,20 @@ public class ProdutoController {
         return produtoService.findAll(page, size, busca);
     }
 
+    @Operation(summary = "Filtrar produtos paginados por nome, com filtro opcional")
+    @GetMapping("/filtro")
+    public Page<ProdutoResponseDTO> filtrar(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(name = "filtro", required = false) String filtro) {
+        return produtoService.findAll(page, size, filtro);
+    }
+
     @Operation(summary = "Consultar produto pelo UUID")
     @ApiResponse(responseCode = "200", description = "Produto encontrado")
     @ApiResponse(responseCode = "404", description = "Produto nao encontrado")
     @GetMapping("/{id}")
-    public ProdutoResponseDTO findById(@PathVariable UUID id) {
+    public ProdutoResponseDTO findById(@PathVariable("id") UUID id) {
         return produtoService.findById(id);
     }
 
@@ -52,9 +61,9 @@ public class ProdutoController {
         return produtoService.update(produtoId, produto);
     }
 
-    @DeleteMapping("/{produtoId}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID produtoId) {
-        produtoService.delete(produtoId);
+    public void delete(@PathVariable("id") UUID id) {
+        produtoService.delete(id);
     }
 }
