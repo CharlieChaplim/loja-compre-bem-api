@@ -34,3 +34,13 @@ Exemplo de POST em `http://localhost:8080/api/v1/produtos`:
 ```
 
 No GET, além dos campos existentes, a resposta contém `"quantidade": 7`.
+
+## Atividade: lista e detalhe diretamente da API
+
+- `GET /api/v1/produtos/filtro?page=0&size=20`: retorna a primeira pagina sem aplicar filtro.
+- `GET /api/v1/produtos/filtro?filtro=CADEIRA&page=0&size=20`: filtra por nome sem diferenciar letras maiusculas e minusculas.
+- `GET /api/v1/produtos/{id}` e `DELETE /api/v1/produtos/{id}` usam `@PathVariable("id")`.
+- `spring.data.web.pageable.serialization-mode=via_dto` entrega `{ "content": [], "page": { "size": 20, "number": 0, "totalElements": 60, "totalPages": 3 } }` (exemplo com 60 itens).
+- `mvnw.cmd`: retirado o escape `^` que estava sendo enviado indevidamente ao PowerShell, bloqueando o download do Maven.
+
+Validacao manual: abra `http://localhost:8080/api/v1/produtos/filtro?filtro=cAdEiRa` e `http://localhost:8080/api/v1/produtos/filtro` depois de iniciar a API.
